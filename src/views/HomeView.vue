@@ -5,7 +5,7 @@
     </main>
     <section class="footer">
       <p class="name">
-        2024 - <strong>uBorn</strong> :: Engenharia de Software
+        2026 - <strong>uBorn</strong> :: Engenharia de Software
       </p>
       <a href="mailto:contato@uborn.com.br" class="contact"
         >contato@uborn.com.br</a
