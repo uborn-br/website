@@ -78,6 +78,21 @@ Ou seja, o fluxo correto é:
 2. Commitar o `dist/` atualizado junto com o código-fonte
 3. Push para `main` → a Action publica o `dist/` commitado no GitHub Pages
 
+### GitHub Pages + rotas do vue-router (gotcha do 404)
+
+O GitHub Pages não tem rewrite de servidor para SPA: ao acessar diretamente uma
+rota como `/aquamena/privacy-policy` (em vez de navegar por dentro do app),
+ele procura um arquivo físico nesse caminho e devolve 404, mesmo com a rota
+existindo e funcionando via navegação client-side.
+
+A correção é ter `dist/404.html` idêntico ao `dist/index.html`: o GitHub Pages
+serve esse arquivo para qualquer caminho não encontrado, o app Vue sobe
+normalmente e o vue-router lê a URL real da barra de endereço e renderiza a
+rota certa no cliente. Isso já é automático: `npm run build` roda um script
+`postbuild` (`package.json`) que copia `dist/index.html` para `dist/404.html`
+— não precisa fazer isso manualmente, só garantir que o `dist/404.html`
+resultante seja commitado junto com o resto do `dist/`.
+
 Esquecer o passo 1 (ou não commitar o `dist/` atualizado) faz o site publicado
 ficar desatualizado mesmo com o código-fonte certo em `main`.
 
